@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+   root 'home#index'
+   
+   get 'home/index'
+   
+   get 'room/new', to: 'rooms#new', as: 'new_room'
+   get 'room/:unique_identifier', to: 'rooms#show', as: 'show_room'
+   post 'room/:room/estimate/:value', to: 'rooms#estimate', as: 'estimate'
 end
