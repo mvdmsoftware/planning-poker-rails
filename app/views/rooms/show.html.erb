@@ -1,19 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<%= turbo_stream_from [@room, :estimates] %>
+<%= turbo_stream_from @room %>
+<%= turbo_stream_from [@room, :participants] %>
 
 <h1>My Estimate</h1>
 <% [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89].each do |v| %>
-<form method="post" action="/room/<%= @room.id %>/estimate/<%= v %>">
+<form method="post" action="/room/<%= @room.unique_identifier %>/estimate/<%= v %>">
    <button type="submit"><%= v %></button>
 </form>
 <% end %>
 
-<h1>Estimates</h1>
-<ul id=" estimates">
-   <% @room.estimates.each do |estimate| %>
-   <%= render 'estimates/estimate', estimate: estimate %>
-   <% end %>
-</ul>
-
-<%= link_to 'Back', root_path %>
+<%= render "room", room: @room %>

@@ -10,22 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_10_141850) do
+ActiveRecord::Schema.define(version: 2021_01_10_210618) do
 
-  create_table "estimates", force: :cascade do |t|
+  create_table "participants", force: :cascade do |t|
     t.integer "room_id", null: false
-    t.integer "value"
+    t.string "user_session_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "user_session_id"
-    t.index ["room_id"], name: "index_estimates_on_room_id"
+    t.integer "estimate"
+    t.index ["room_id"], name: "index_participants_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
     t.string "unique_identifier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "participants_count"
+    t.boolean "is_hidden"
   end
 
-  add_foreign_key "estimates", "rooms"
+  add_foreign_key "participants", "rooms"
 end
