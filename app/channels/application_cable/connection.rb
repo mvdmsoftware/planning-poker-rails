@@ -6,9 +6,9 @@ module ApplicationCable
          participant.destroy
       end
 
-      # Room.where(participants_count: 0).each do |room|
-      #    room.destroy
-      # end
+      Room.where(participants_count: 0).each do |room|
+         room.destroy
+      end
    end
   end
 end

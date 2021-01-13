@@ -1,7 +1,11 @@
-<li id="<%= dom_id participant %>" class="<%= 'my-estimate' if participant.user_session_id == session[:session_id] %>">
-   <% if participant.room.revealed? || participant.user_session_id == session[:session_id] %>
-   <%= participant.estimate || "?" %>
+<% 
+   is_this_user = participant.user_session_id == session[:session_id]
+%>
+
+<div id="<%= dom_id participant %>" class="estimate-card <%= 'my-estimate' if is_this_user %>">
+   <% if participant.room.revealed? || is_this_user %>
+      <%= participant.estimate || "?" %>
    <% else %>
-   ?
+      ?
    <% end %>
-</li>
+</div>

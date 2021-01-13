@@ -1,13 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<%= turbo_stream_from @room %>
-<%= turbo_stream_from [@room, :participants] %>
-
 <h1>My Estimate</h1>
-<% [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89].each do |v| %>
-<form method="post" action="/room/<%= @room.unique_identifier %>/estimate/<%= v %>">
-   <button type="submit"><%= v %></button>
-</form>
-<% end %>
+<div class="options-container">
+   <% [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89].each do |v| %>
+   <form class="option-form" method="post" action="/room/<%= @room.unique_identifier %>/estimate/<%= v %>">
+      <button class="option-button" type="submit"><%= v %></button>
+   </form>
+   <% end %>
+</div>
 
-<%= render "room", room: @room %>
+<div id="<%= dom_id @room %>">
+   <%= render "room", room: @room %>
+</div>
+
+<div>
+   <h3>DEBUG</h3>
+   <%= @room.inspect %>
+</div>

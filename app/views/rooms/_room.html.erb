@@ -1,22 +1,22 @@
-<div id="<%= dom_id room %>">
-   <h1>Estimates</h1>
-   <ul id="participants">
-      <% room.participants.each do |participant| %>
+<%= turbo_stream_from room, :participants %>
+
+<h1>Estimates</h1>
+<div id="participants" class="estimates-container">
+   <% room.participants.each do |participant| %>
       <%= render 'participants/participant', participant: participant %>
-      <% end %>
-   </ul>
-
-   <%= link_to 'Back', root_path %>
-
-   <form method="post" action="/room/<%= room.unique_identifier %>/reset">
-      <button type="submit">Reset</button>
-   </form>
-
-   <form method="post" action="/room/<%= room.unique_identifier %>/hide">
-      <button type="submit">Hide</button>
-   </form>
-
-   <form method="post" action="/room/<%= room.unique_identifier %>/reveal">
-      <button type="submit">Reveal</button>
-   </form>
+   <% end %>
 </div>
+
+<%= link_to 'Back', root_path %>
+
+<form method="post" action="/room/<%= room.unique_identifier %>/reset">
+   <button type="submit">Reset</button>
+</form>
+
+<form method="post" action="/room/<%= room.unique_identifier %>/hide">
+   <button type="submit">Hide</button>
+</form>
+
+<form method="post" action="/room/<%= room.unique_identifier %>/reveal">
+   <button type="submit">Reveal</button>
+</form>
